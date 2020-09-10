@@ -9,41 +9,106 @@ from django.db import models
 
 
 class Acompanante(models.Model):
-    rut_pasaporte = models.CharField(primary_key=True, max_length=1)
+    rut_pasaporte = models.CharField(primary_key=True, max_length=15)
     nombre = models.CharField(max_length=15)
     apellido_m = models.CharField(max_length=15)
     appelido_p = models.CharField(max_length=15)
     fecha_nacimiento = models.DateField()
-    cliente_rut_pasaporte = models.ForeignKey('Cliente', models.DO_NOTHING, db_column='cliente_rut_pasaporte')
+    cliente_rut_pasaporte = models.ForeignKey('Cliente', models.DO_NOTHING, db_column='cliente_rut_pasaporte', blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'acompanante'
 
 
-class Checkin(models.Model):
+class AuthGroup(models.Model):
+    name = models.CharField(unique=True, max_length=150, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group'
+
+
+class AuthGroupPermissions(models.Model):
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group_permissions'
+        unique_together = (('group', 'permission'),)
+
+
+class AuthPermission(models.Model):
+    name = models.CharField(max_length=255, blank=True, null=True)
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
+    codename = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_permission'
+        unique_together = (('content_type', 'codename'),)
+
+
+class AuthUser(models.Model):
+    password = models.CharField(max_length=128, blank=True, null=True)
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.BooleanField()
+    username = models.CharField(unique=True, max_length=150, blank=True, null=True)
+    first_name = models.CharField(max_length=150, blank=True, null=True)
+    last_name = models.CharField(max_length=150, blank=True, null=True)
+    email = models.CharField(max_length=254, blank=True, null=True)
+    is_staff = models.BooleanField()
+    is_active = models.BooleanField()
+    date_joined = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user'
+
+
+class AuthUserGroups(models.Model):
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_groups'
+        unique_together = (('user', 'group'),)
+
+
+class AuthUserUserPermissions(models.Model):
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_user_permissions'
+        unique_together = (('user', 'permission'),)
+
+
+class CheckIn(models.Model):
     id_chek_in = models.IntegerField(primary_key=True)
     fecha_llegada = models.DateField()
     estado_hbitacion = models.CharField(max_length=20)
     departamento_n_rol = models.ForeignKey('Departamento', models.DO_NOTHING, db_column='departamento_n_rol')
-    cliente_rut_pasaporte = models.ForeignKey('Cliente', models.DO_NOTHING, db_column='cliente_rut_pasaporte')
     empleado_rut = models.ForeignKey('Empleado', models.DO_NOTHING, db_column='empleado_rut')
 
     class Meta:
         managed = False
-        db_table = 'checkin'
+        db_table = 'check_in'
 
 
-class Checkout(models.Model):
+class CheckOut(models.Model):
     id_chek_out = models.IntegerField(primary_key=True)
-    estado_entrega = models.CharField(max_length=20)
+    estado_entrega = models.CharField(max_length=1)
     empleado_rut = models.ForeignKey('Empleado', models.DO_NOTHING, db_column='empleado_rut')
-    id_pago = models.IntegerField()
+    pago_id_pago = models.ForeignKey('Pago', models.DO_NOTHING, db_column='pago_id_pago', blank=True, null=True)
     departamento_n_rol = models.ForeignKey('Departamento', models.DO_NOTHING, db_column='departamento_n_rol')
 
     class Meta:
         managed = False
-        db_table = 'checkout'
+        db_table = 'check_out'
 
 
 class Chofer(models.Model):
@@ -51,7 +116,6 @@ class Chofer(models.Model):
     nombre = models.CharField(max_length=15)
     apellido_m = models.CharField(max_length=15)
     apellido_p = models.CharField(max_length=15)
-    vehiculo_patente = models.CharField(max_length=6, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -66,9 +130,6 @@ class Cliente(models.Model):
     nombre = models.CharField(max_length=15)
     apellido_m = models.CharField(max_length=15)
     apellido_p = models.CharField(max_length=15)
-    chek_out_id_chek_out = models.ForeignKey(Checkout, models.DO_NOTHING, db_column='chek-out_id_chek_out', blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    reserva_id_reserva = models.ForeignKey('Reserva', models.DO_NOTHING, db_column='reserva_id_reserva')
-    id_pago = models.IntegerField()
 
     class Meta:
         managed = False
@@ -77,7 +138,7 @@ class Cliente(models.Model):
 
 class Comuna(models.Model):
     id_comuna = models.BigIntegerField(primary_key=True)
-    desc_comuna = models.CharField(max_length=15)
+    nombre_comuna = models.CharField(max_length=15)
     region_n_region = models.ForeignKey('Region', models.DO_NOTHING, db_column='region_n_region')
 
     class Meta:
@@ -87,24 +148,66 @@ class Comuna(models.Model):
 
 class Departamento(models.Model):
     n_rol = models.CharField(primary_key=True, max_length=11)
-    n_baños = models.IntegerField()
+    n_banos = models.IntegerField()
     n_habitaciones = models.IntegerField()
     desc_habitacion = models.CharField(max_length=20)
     precio_dia = models.BigIntegerField()
-    nombre_edificio = models.CharField(max_length=15)
     n_departameto = models.IntegerField()
     comuna_id_comuna = models.ForeignKey(Comuna, models.DO_NOTHING, db_column='comuna_id_comuna')
-    mantencion_id_mantencion = models.ForeignKey('Mantencion', models.DO_NOTHING, db_column='mantencion_id_mantencion', blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'departamento'
 
 
+class DjangoAdminLog(models.Model):
+    action_time = models.DateTimeField()
+    object_id = models.TextField(blank=True, null=True)
+    object_repr = models.CharField(max_length=200, blank=True, null=True)
+    action_flag = models.IntegerField()
+    change_message = models.TextField(blank=True, null=True)
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'django_admin_log'
+
+
+class DjangoContentType(models.Model):
+    app_label = models.CharField(max_length=100, blank=True, null=True)
+    model = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'django_content_type'
+        unique_together = (('app_label', 'model'),)
+
+
+class DjangoMigrations(models.Model):
+    app = models.CharField(max_length=255, blank=True, null=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    applied = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_migrations'
+
+
+class DjangoSession(models.Model):
+    session_key = models.CharField(primary_key=True, max_length=40)
+    session_data = models.TextField(blank=True, null=True)
+    expire_date = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_session'
+
+
 class Empleado(models.Model):
     rut = models.CharField(primary_key=True, max_length=12)
     nombre = models.CharField(max_length=15)
-    pellido_m = models.CharField(max_length=15)
+    apellido_p = models.CharField(max_length=15)
     correo = models.CharField(max_length=30)
 
     class Meta:
@@ -127,8 +230,8 @@ class Inventario(models.Model):
 
 class Login(models.Model):
     usuario = models.CharField(primary_key=True, max_length=20)
-    password = models.CharField(max_length=20, blank=True, null=True)
-    cliente_rut_pasaporte = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_rut_pasaporte')
+    password = models.CharField(max_length=20)
+    rol = models.CharField(max_length=20)
 
     class Meta:
         managed = False
@@ -140,6 +243,7 @@ class Mantencion(models.Model):
     fecha_inicio = models.DateField()
     fecha_termino = models.DateField()
     observaciones = models.CharField(max_length=100)
+    departamento_n_rol = models.ForeignKey(Departamento, models.DO_NOTHING, db_column='departamento_n_rol', blank=True, null=True)
 
     class Meta:
         managed = False
@@ -151,6 +255,7 @@ class Multas(models.Model):
     n_mutas_cobras = models.IntegerField()
     valor_multa = models.IntegerField()
     departamento_n_rol = models.ForeignKey(Departamento, models.DO_NOTHING, db_column='departamento_n_rol', blank=True, null=True)
+    descripcion = models.CharField(max_length=30)
 
     class Meta:
         managed = False
@@ -163,7 +268,6 @@ class Pago(models.Model):
     tipo_operacion = models.CharField(max_length=10)
     descripcion_pago = models.CharField(max_length=10)
     departamento_n_rol = models.ForeignKey(Departamento, models.DO_NOTHING, db_column='departamento_n_rol')
-    reserva_id_reserva = models.IntegerField()
     id_pago = models.IntegerField(primary_key=True)
 
     class Meta:
@@ -173,7 +277,7 @@ class Pago(models.Model):
 
 class Region(models.Model):
     n_region = models.IntegerField(primary_key=True)
-    nombre = models.CharField(max_length=10, blank=True, null=True)
+    nombre = models.CharField(max_length=10)
 
     class Meta:
         managed = False
@@ -182,9 +286,10 @@ class Region(models.Model):
 
 class Reserva(models.Model):
     id_reserva = models.IntegerField(primary_key=True)
-    fecha_lelgada = models.DateField()
-    departamento_n_rol = models.ForeignKey(Departamento, models.DO_NOTHING, db_column='departamento_n_rol', blank=True, null=True)
-    id_pago = models.IntegerField(blank=True, null=True)
+    fecha_llegada = models.DateField()
+    departamento_n_rol = models.ForeignKey(Departamento, models.DO_NOTHING, db_column='departamento_n_rol')
+    pago_id_pago = models.ForeignKey(Pago, models.DO_NOTHING, db_column='pago_id_pago')
+    cliente_rut_pasaporte = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_rut_pasaporte', blank=True, null=True)
 
     class Meta:
         managed = False
@@ -193,11 +298,10 @@ class Reserva(models.Model):
 
 class Servicio(models.Model):
     id_servicio = models.IntegerField(primary_key=True)
-    nom_servicio = models.CharField(max_length=10)
+    nom_servicio = models.CharField(max_length=30)
     valor = models.IntegerField()
     vehiculo_patente = models.ForeignKey('Vehiculo', models.DO_NOTHING, db_column='vehiculo_patente', blank=True, null=True)
-    contrado = models.BooleanField()
-    departamento_n_rol = models.ForeignKey(Departamento, models.DO_NOTHING, db_column='departamento_n_rol', blank=True, null=True)
+    departamento_n_rol = models.ForeignKey(Departamento, models.DO_NOTHING, db_column='departamento_n_rol')
 
     class Meta:
         managed = False
@@ -219,9 +323,9 @@ class Tour(models.Model):
 class Vehiculo(models.Model):
     patente = models.CharField(primary_key=True, max_length=6)
     capacidad = models.IntegerField()
-    disponibilidad = models.IntegerField()
-    chofer_rut = models.CharField(max_length=1)
+    disponibilidad = models.BooleanField()
     tour_id_tour = models.ForeignKey(Tour, models.DO_NOTHING, db_column='tour_id_tour', blank=True, null=True)
+    chofer_rut = models.ForeignKey(Chofer, models.DO_NOTHING, db_column='chofer_rut', blank=True, null=True)
 
     class Meta:
         managed = False
