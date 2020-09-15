@@ -11,6 +11,7 @@ class CustomForm extends React.Component {
         const Nombre = event.target.elements.Nombre.value;
         const Apellido = event.target.elements.Apellido.value;
         const Correo = event.target.elements.Correo.value;
+      
 
         switch ( requestType ) {
             case 'post':
@@ -22,7 +23,7 @@ class CustomForm extends React.Component {
                 })
                 .then(res => console.log(res))
                 .catch(error => console.err(error));
-            case 'pust':
+            case 'put':
                 return axios.put(`http://127.0.0.1:8000/api/empleados/${ID}`, {
                     Rut: Rut,
                     Nombre: Nombre,

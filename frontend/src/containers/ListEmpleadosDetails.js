@@ -8,12 +8,12 @@ import CustomForm from '../components/FormEmployee';
 
 class EmpleadoDetail extends React.Component {
     state = {
-      article: {}
+      empleado: {}
     };
   
     componentDidMount() {
-      const ID = this.props.match.params.ID;
-      axios.get(`http://127.0.0.1:8000/api/empleados/${ID}`).then(res => {
+      const details = this.props.match.params.details;
+      axios.get(`http://127.0.0.1:8000/api/empleados/${details}`).then(res => {
         this.setState({
           empleado: res.data
         });
@@ -22,12 +22,12 @@ class EmpleadoDetail extends React.Component {
   
     handleDelete = event => {
       event.preventDefault();
-      const ID = this.props.match.params.ID;
+      const details = this.props.match.params.details;
       axios.defaults.headers = {
         "Content-Type": "application/json",
         Authorization: `Token ${this.props.token}`
       };
-      axios.delete(`http://127.0.0.1:8000/api/empleados/${ID}/delete/`)
+      axios.delete(`http://127.0.0.1:8000/api/empleados/${details}/delete/`)
       .then(res => {
         if (res.status === 204) {
           this.props.history.push(`/`);
@@ -38,14 +38,14 @@ class EmpleadoDetail extends React.Component {
     render() {
       return (
         <div>
-          <Card title={this.state.article.title}>
-            <p> {this.state.article.content} </p>
+          <Card Rut={this.state.empleado.Rut}>
+            <p> {this.state.empleado.Nombre} </p>
           </Card>
           <CustomForm
             {...this.props}
             token={this.props.token}
             requestType="put"
-            ID={this.props.match.params.ID}
+            details={this.props.match.params.details}
             btnText="Update"
           />
           <form onSubmitCapture={this.handleDelete}>
