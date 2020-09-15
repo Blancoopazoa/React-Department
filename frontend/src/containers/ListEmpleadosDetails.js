@@ -13,7 +13,7 @@ class EmpleadoDetail extends React.Component {
   
     componentDidMount() {
       const ID = this.props.match.params.ID;
-      axios.get(`http://127.0.0.1:8000/api/empleados/${ID}`).then(res => {
+      axios.get(`http://127.0.0.1:8000/empleados/${ID}`).then(res => {
         this.setState({
           empleado: res.data
         });
@@ -27,7 +27,7 @@ class EmpleadoDetail extends React.Component {
         "Content-Type": "application/json",
         Authorization: `Token ${this.props.token}`
       };
-      axios.delete(`http://127.0.0.1:8000/api/empleados/${ID}/delete/`)
+      axios.delete(`http://127.0.0.1:8000/empleados/${ID}/delete/`)
       .then(res => {
         if (res.status === 204) {
           this.props.history.push(`/`);

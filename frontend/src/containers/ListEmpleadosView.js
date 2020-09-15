@@ -11,7 +11,7 @@ class EmpleadoListView extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://127.0.0.1:8000/api/empleados/')
+        axios.get('http://127.0.0.1:8000/empleados/')
           .then(res => {
             this.setState({
               reservas: res.data
