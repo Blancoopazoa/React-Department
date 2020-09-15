@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
-    'rest_framework',
+    'rest_framework',   
 ]
 
 MIDDLEWARE = [
@@ -81,8 +81,8 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'localhost:1521/xe',
-        'USER': 'c##blanco',
+        'NAME': 'localhost:1521/orcl',
+        'USER': 'DESARROLLO',
         'PASSWORD': '123456',
         'TEST': {
             'USER': 'default_test',
@@ -92,7 +92,12 @@ DATABASES = {
     },
 }
 
-
+# Django rest framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication'
+    ]
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
