@@ -9,4 +9,5 @@ router.register('checkins',CheckInViewSet,'checkins')
 router.register('checkouts',CheckOutViewSet,'checkouts')
 
 
+
 urlpatterns = router.urls
