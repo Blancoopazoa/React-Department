@@ -30,10 +30,10 @@ class CustomForm extends React.Component {
                 .catch(error => console.err(error));
             case 'pust':
                 return axios.put(`http://127.0.0.1:8000/empleados/${ID}`, {
-                    Rut: Rut,
-                    Nombre: Nombre,
-                    Apellido_p: Apellido_p,
-                    Correo: Correo
+                    rut: Rut,
+                    nombre: Nombre,
+                    apellido_p: Apellido_p,
+                    correo: Correo
                 })
                 .then(res => console.log(res))
                 .catch(error => console.err(error));

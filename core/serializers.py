@@ -29,7 +29,7 @@ class ChoferSerializer(serializers.ModelSerializer):
 
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Chofer 
+        model = Cliente  
         fields = '__all__'
 
 class ComunaSerializer(serializers.ModelSerializer):
@@ -90,7 +90,7 @@ class TourSerializer(serializers.ModelSerializer):
 class VehiculoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vehiculo 
-        fields = '_all__'
+        fields = '__all__'
 
 
 
