@@ -38,14 +38,12 @@ export const checkAuthTimeout = expirationTime => {
 }
 
 //Crear Usuario Cliente
-export const authSignup = (username, password, password2, email) => {
+export const authSignup = (username, password) => {
     return dispatch => {
         dispatch(authStart());
-        axiosn.post('http://127.0.0.1:8000/',{
-            username: username,
-            password: password,
-            password2: password2,
-            email: email
+        axios.post('http://127.0.0.1:8000/empleados',{
+            usuario: username,
+            password: password
         })
         .then(res => {
             const token = res.data.key;

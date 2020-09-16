@@ -7,27 +7,33 @@ class CustomForm extends React.Component {
 
     handleFormSubmit = (event, requestType, ID) => {
         event.preventDefault();
-        const Rut = event.target.elements.Rut.value;
-        const Nombre = event.target.elements.Nombre.value;
-        const Apellido = event.target.elements.Apellido.value;
-        const Correo = event.target.elements.Correo.value;
+        const Rut = event.target.elements.rut.value;
+        const Nombre = event.target.elements.nombre.value;
+        const Apellido_p = event.target.elements.apellido_p.value;
+        const Correo = event.target.elements.correo.value;
       
 
         switch ( requestType ) {
             case 'post':
-                return axios.post('http://127.0.0.1:8000/api/empleados/', {
-                    Rut: Rut,
-                    Nombre: Nombre,
-                    Apellido: Apellido,
-                    Correo: Correo
+                return axios.post('http://127.0.0.1:8000/empleados/', {
+                    rut: Rut,
+                    nombre: Nombre,
+                    apellido_p: Apellido_p,
+                    correo: Correo
+                },{
+                  withCredentials: true,
+                  headers: {'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'Access-Control-Allow-Origin' : '*',
+                            'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS' },
                 })
                 .then(res => console.log(res))
                 .catch(error => console.err(error));
             case 'put':
-                return axios.put(`http://127.0.0.1:8000/api/empleados/${ID}`, {
+                return axios.put(`http://127.0.0.1:8000/empleados/${ID}`, {
                     Rut: Rut,
                     Nombre: Nombre,
-                    Apellido: Apellido,
+                    Apellido_p: Apellido_p,
                     Correo: Correo
                 })
                 .then(res => console.log(res))
@@ -45,16 +51,16 @@ class CustomForm extends React.Component {
           event, 
         this.props.requestType )}>
         <Form.Item label="Rut">
-          <Input name="Rut" placeholder="input placeholder" />
+          <Input name="rut" placeholder="Ingresar Rut" />
         </Form.Item>
         <Form.Item label="Nombre">
-          <Input name="Nombre" placeholder="input placeholder" />
+          <Input name="nombre" placeholder="Ingresar Nombre" />
         </Form.Item>
-        <Form.Item label="Apellido">
-          <Input name="Apellido" placeholder="input placeholder" />
+        <Form.Item label="Apellido Paterno">
+          <Input name="apellido_p" placeholder="Ingresar Apellido" />
         </Form.Item>
         <Form.Item label="Correo">
-          <Input name="Correo" placeholder="input placeholder" />
+          <Input name="correo" placeholder="Ingresar Correo" />
         </Form.Item>
         <Form.Item >
           <Button type="primary" htmlType="submit" >{this.props.btnText}</Button>
