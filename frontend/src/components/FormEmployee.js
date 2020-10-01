@@ -5,7 +5,7 @@ import axios from 'axios';
 //Post y put Crud Para Empleado
 class CustomForm extends React.Component {
 
-    handleFormSubmit = (event, requestType, ID) => {
+    handleFormSubmit = (event, requestType, RUT) => {
         event.preventDefault();
         const Rut = event.target.elements.rut.value;
         const Nombre = event.target.elements.nombre.value;
@@ -28,16 +28,22 @@ class CustomForm extends React.Component {
                             'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS' },
                 })
                 .then(res => console.log(res))
-                .catch(error => console.err(error));
+                .catch(error => console.error(error));
             case 'put':
-                return axios.put(`http://127.0.0.1:8000/empleados/${ID}`, {
+                return axios.put(`http://127.0.0.1:8000/empleados/${RUT}`, {
                     rut: Rut,
                     nombre: Nombre,
                     apellido_p: Apellido_p,
                     correo: Correo
+                },{
+                  withCredentials: true,
+                  headers: {'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'Access-Control-Allow-Origin' : '*',
+                            'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS' },
                 })
                 .then(res => console.log(res))
-                .catch(error => console.err(error));
+                .catch(error => console.error(error));
             
         }
     }
