@@ -5,7 +5,7 @@ import axios from 'axios';
 //Post y put Crud Para Empleado
 class CustomForm extends React.Component {
 
-    handleFormSubmit = (event, requestType, RUT) => {
+    handleFormSubmit = (event, requestType) => {
         event.preventDefault();
         const Rut = event.target.elements.rut.value;
         const Nombre = event.target.elements.nombre.value;
@@ -30,7 +30,7 @@ class CustomForm extends React.Component {
                 .then(res => console.log(res))
                 .catch(error => console.error(error));
             case 'put':
-                return axios.put(`http://127.0.0.1:8000/empleados/${RUT}`, {
+                return axios.put('http://127.0.0.1:8000/empleados/', {
                     rut: Rut,
                     nombre: Nombre,
                     apellido_p: Apellido_p,
