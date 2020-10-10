@@ -81,8 +81,8 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'localhost:1521/orcl',
-        'USER': 'DESARROLLO',
+        'NAME': 'localhost:1521/xe',
+        'USER': 'c##blanco',
         'PASSWORD': '123456',
         'TEST': {
             'USER': 'default_test',
