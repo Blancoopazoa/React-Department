@@ -1,17 +1,15 @@
 import React from 'react';
+import '../App';
+import { Link } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
       import {
-        AppstoreOutlined,
         BarChartOutlined,
-        CloudOutlined,
-        ShopOutlined,
-        TeamOutlined,
         UserOutlined,
         UploadOutlined,
         VideoCameraOutlined,
       } from '@ant-design/icons';
   
-      const { Header, Content, Footer, Sider } = Layout;
+      const { Header, Content, Sider } = Layout;
 
 const CustomLayout = (props) => {
     return (
@@ -30,10 +28,10 @@ const CustomLayout = (props) => {
             <div className="logo" />
             <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
               <Menu.Item key="1" icon={<UserOutlined />}>
-                Empleados
+                <Link to="/empleados">Empleados</Link>
               </Menu.Item>
               <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-                Departamentos
+              <Link to="/departamentos">Departamentos</Link>
               </Menu.Item>
               <Menu.Item key="3" icon={<UploadOutlined />}>
                 Reservas
