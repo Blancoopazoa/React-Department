@@ -82,12 +82,17 @@ DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.oracle',
 <<<<<<< HEAD
+<<<<<<< HEAD
         'NAME': 'localhost:1521/xe',
         'USER': 'TURISMO',
         'PASSWORD': 'TURISMO',
 =======
         'NAME': 'localhost:1521/orcl',
         'USER': 'DESARROLLO',
+=======
+        'NAME': 'localhost:1521/xe',
+        'USER': 'c##blanco',
+>>>>>>> master
         'PASSWORD': '123456',
 >>>>>>> master
         'TEST': {
