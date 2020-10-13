@@ -34,10 +34,13 @@ const CustomLayout = (props) => {
               <Link to="/departamentos">Departamentos</Link>
               </Menu.Item>
               <Menu.Item key="3" icon={<UploadOutlined />}>
-                Reservas
+              <Link to="/cliente">Cliente</Link>
               </Menu.Item>
               <Menu.Item key="4" icon={<BarChartOutlined />}>
-                Servicios
+              <Link to="/inventario">Inventario</Link>
+              </Menu.Item>
+              <Menu.Item key="5" icon={<BarChartOutlined />}>
+              <Link to="/reservas">Reservas</Link>
               </Menu.Item>
             </Menu>
           </Sider>
