@@ -1,17 +1,17 @@
 import React from 'react';
 import axios from 'axios';
 
-import ListEmpleados from '../components/ListEmpleados';
-import CustomForm from '../components/FormEmployee';
+import ListDepartamentos from '../components/ListDepartamentos';
+import CustomFormDepa from '../components/FormDepartamentos';
 
-class EmpleadoListView extends React.Component {
+class DepartamentoListView extends React.Component {
 
     state = {
       reservas: []
     }
 
     componentDidMount() {
-        axios.get('http://127.0.0.1:8000/empleados/')
+        axios.get('http://127.0.0.1:8000/departamento/')
           .then(res => {
             this.setState({
               reservas: res.data
@@ -23,16 +23,16 @@ class EmpleadoListView extends React.Component {
     render() {
         return (
             <div>
-              <h2>Crear Empleado</h2>
-            <CustomForm 
+              <h2>Crear Departamento</h2>
+            <CustomFormDepa 
               requestType="post"
               btnText="Crear"
             />
             <br />
-            <ListEmpleados data={this.state.reservas} />
+            <ListDepartamentos data={this.state.reservas} />
             </div>
         )
     }
 }
 
-export default EmpleadoListView;
+export default DepartamentoListView;
