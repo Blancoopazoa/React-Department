@@ -26,7 +26,7 @@ SECRET_KEY = 'u6_imtk=@e+)3ypf$#12wzcjo*sf*=p&@u-*3)40xq0&^*(l__'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -81,20 +81,9 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.oracle',
-<<<<<<< HEAD
-<<<<<<< HEAD
         'NAME': 'localhost:1521/xe',
         'USER': 'TURISMO',
         'PASSWORD': 'TURISMO',
-=======
-        'NAME': 'localhost:1521/orcl',
-        'USER': 'DESARROLLO',
-=======
-        'NAME': 'localhost:1521/xe',
-        'USER': 'c##blanco',
->>>>>>> master
-        'PASSWORD': '123456',
->>>>>>> master
         'TEST': {
             'USER': 'default_test',
             'TBLSPACE': 'default_test_tbls',
