@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',   
 ]
 
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -94,6 +96,7 @@ DATABASES = {
 
 # Django rest framework
 REST_FRAMEWORK = {
+    'DATE_INPUT_FORMATS':['%d-%m-%Y'],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication'
     ]
