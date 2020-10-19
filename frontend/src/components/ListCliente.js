@@ -3,9 +3,24 @@ import { Table, Button } from 'antd';
 
 const columns = [
   {
-    title: 'Rut',
-    dataIndex: 'rut',
-    key: 'rut',
+    title: 'Rut Pasaporte',
+    dataIndex: 'rut_pasaporte',
+    key: 'rut_pasaporte',
+  },
+  {
+    title: 'Celular',
+    dataIndex: 'cel',
+    key: 'cel',
+  },
+  {
+    title: 'Correo',
+    dataIndex: 'correo',
+    key: 'correo',
+  },
+  {
+    title: 'Nacimiento',
+    dataIndex: 'nacimineto',
+    key: 'nacimineto',
   },
   {
     title: 'Nombre',
@@ -18,9 +33,9 @@ const columns = [
     key: 'apellido_p',
   },
   {
-    title: 'Correo',
-    dataIndex: 'correo',
-    key: 'correo',
+    title: 'Apellido Materno',
+    dataIndex: 'apellido_m',
+    key: 'apellido_m',
   },
   {
     title: 'Acciones',
@@ -30,10 +45,10 @@ const columns = [
   },
 ];
 
-const ListEmpleados = (props) => {
+const ListCliente = (props) => {
     return (
     <Table dataSource={props.data} columns={columns} />
     )
 }
 
-export default ListEmpleados;
+export default ListCliente;

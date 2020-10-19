@@ -1,27 +1,53 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import '../App';
 import { Link } from 'react-router-dom';
-
-
-const { Header, Content } = Layout;
+import { Layout, Menu } from 'antd';
+      import {
+        BarChartOutlined,
+        UserOutlined,
+        UploadOutlined,
+        VideoCameraOutlined,
+      } from '@ant-design/icons';
+  
+      const { Header, Content, Sider } = Layout;
 
 const CustomLayout = (props) => {
     return (
         <Layout>
-    <Header className="header">
-      <div className="logo" />
-      <Menu theme="white" mode="horizontal" defaultSelectedKeys={['1']}>
-        <Menu.Item key="1"><Link to="/">Empleado</Link></Menu.Item>
-        <Menu.Item key="2"><Link to="/">Login</Link></Menu.Item>
-        <Menu.Item key="3">nav 2</Menu.Item>
-        <Menu.Item key="4">nav 3</Menu.Item>
-      </Menu>
-    </Header>
-    <Content style={{ padding: '0 50px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-        </Breadcrumb>
-        <Content
+          <Sider
+            style={{
+              overflow: 'auto',
+              height: '100vh',
+              position: 'fixed',
+              left: 0,
+            }}
+          >
+            <br/>
+            <br/>
+            <br/>
+            <div className="logo" />
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
+              <Menu.Item key="1" icon={<UserOutlined />}>
+                <Link to="/empleados">Empleados</Link>
+              </Menu.Item>
+              <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+              <Link to="/departamentos">Departamentos</Link>
+              </Menu.Item>
+              <Menu.Item key="3" icon={<UploadOutlined />}>
+              <Link to="/cliente">Cliente</Link>
+              </Menu.Item>
+              <Menu.Item key="4" icon={<BarChartOutlined />}>
+              <Link to="/inventario">Inventario</Link>
+              </Menu.Item>
+              <Menu.Item key="5" icon={<BarChartOutlined />}>
+              <Link to="/reservas">Reservas</Link>
+              </Menu.Item>
+            </Menu>
+          </Sider>
+          <Layout className="site-layout" style={{ marginLeft: 200 }}>
+            <Header className="site-layout-background" style={{ padding: 0 }} />
+            <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+              <Content
           className="site-layout-background"
           style={{
             padding: 24,
@@ -31,9 +57,9 @@ const CustomLayout = (props) => {
         >
           {props.children}
         </Content>
-        </Content>
-      </Layout>
-    );
+            </Content>
+          </Layout>
+        </Layout>
+      );
 }
  export default CustomLayout;
-  
