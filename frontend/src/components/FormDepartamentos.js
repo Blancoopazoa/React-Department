@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Select } from 'antd';
 import axios from 'axios';
 
 //Post y put Crud Para Departamentos
@@ -7,23 +7,24 @@ class CustomFormDepa extends React.Component {
 
     handleFormSubmit = (event, requestType) => {
         event.preventDefault();
-        const N_ROL = event.target.elements.n_rol.value;
-        const N_BANOS= event.target.elements.n_banos.value;
-        const N_HABITACIONES = event.target.elements.apellido_p.value;
-        const DESC_HABITACION = event.target.elements.desc_habitacion.value;
-        const PRECIO_DIA = event.target.elements.precio_dia.value;
-        const N_DEPARTAMETO = event.target.elements.desc_habitacion.value;
-      
+        const N_Rol = event.target.elements.n_rol.value;
+        const N_Banos= event.target.elements.n_banos.value;
+        const N_Habitaciones = event.target.elements.n_habitaciones.value;
+        const DESC_Habitacion = event.target.elements.desc_habitacion.value;
+        const Precio_Dia = event.target.elements.precio_dia.value;
+        const N_Departamento = event.target.elements.desc_habitacion.value;
+        const Comuna_ID_Comuna = event.target.elements.comuna_id_comuna.value;
 
         switch ( requestType ) {
             case 'post':
                 return axios.post('http://127.0.0.1:8000/departamento/', {
-                    n_rol: N_ROL,
-                    n_banos: N_BANOS,
-                    n_habitaciones: N_HABITACIONES,
-                    desc_habitacion: DESC_HABITACION,
-                    precio_dia: PRECIO_DIA,
-                    n_departameto: N_DEPARTAMETO
+                    n_rol: N_Rol,
+                    n_banos: N_Banos,
+                    n_habitaciones: N_Habitaciones,
+                    desc_habitacion: DESC_Habitacion,
+                    precio_dia: Precio_Dia,
+                    n_departameto: N_Departamento,
+                    comuna_id_comuna: Comuna_ID_Comuna
                 },{
                   withCredentials: true,
                   headers: {'Content-Type': 'application/json',
@@ -35,12 +36,14 @@ class CustomFormDepa extends React.Component {
                 .catch(error => console.error(error));
             case 'put':
                 return axios.put('http://127.0.0.1:8000/departamento/', {
-                    n_rol: N_ROL,
-                    n_banos: N_BANOS,
-                    n_habitaciones: N_HABITACIONES,
-                    desc_habitacion: DESC_HABITACION,
-                    precio_dia: PRECIO_DIA,
-                    n_departameto: N_DEPARTAMETO
+                   n_rol: N_Rol,
+                    n_banos: N_Banos,
+                    n_habitaciones: N_Habitaciones,
+                    desc_habitacion: DESC_Habitacion,
+                    precio_dia: Precio_Dia,
+                    n_departameto: N_Departamento,
+                    comuna_id_comuna: Comuna_ID_Comuna
+
                 },{
                   withCredentials: true,
                   headers: {'Content-Type': 'application/json',
@@ -80,10 +83,17 @@ class CustomFormDepa extends React.Component {
         <Form.Item label="Número de Departamentos">
           <Input name="n_departameto" placeholder="Ingresar Número de Departamento" />
         </Form.Item>
+        <Form.Item label="Comuna">
+          <Input name="comuna_id_comuna" placeholder="Ingresar Número de Departamento" />
+        </Form.Item>
+        <br/>
+        <br/>
+        <br/>
         <Form.Item >
           <Button type="primary" htmlType="submit" >{this.props.btnText}</Button>
         </Form.Item>
       </Form>
+      
     </>
   );
 }
