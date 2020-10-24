@@ -268,7 +268,7 @@ class Pago(models.Model):
     tipo_operacion = models.CharField(max_length=10)
     descripcion_pago = models.CharField(max_length=10)
     departamento_n_rol = models.ForeignKey(Departamento, models.DO_NOTHING, db_column='departamento_n_rol')
-    id_pago = models.IntegerField(primary_key=True)
+    id_pago = models.AutoField(primary_key=True)
 
     class Meta:
         managed = False
@@ -285,10 +285,11 @@ class Region(models.Model):
 
 
 class Reserva(models.Model):
-    id_reserva = models.IntegerField(primary_key=True)
+    id_reserva = models.AutoField(primary_key=True)
     fecha_llegada = models.DateField()
     departamento_n_rol = models.ForeignKey(Departamento, models.DO_NOTHING, db_column='departamento_n_rol')
-    pago_id_pago = models.ForeignKey(Pago, models.DO_NOTHING, db_column='pago_id_pago')
+    ##pago_id_pago = models.ForeignKey(Pago, models.DO_NOTHING, db_column='pago_id_pago')
+    pago_id_pago = Pago.id_pago
     cliente_rut_pasaporte = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_rut_pasaporte', blank=True, null=True)
 
     class Meta:
