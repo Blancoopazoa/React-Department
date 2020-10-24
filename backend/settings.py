@@ -26,7 +26,7 @@ SECRET_KEY = 'u6_imtk=@e+)3ypf$#12wzcjo*sf*=p&@u-*3)40xq0&^*(l__'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -82,8 +82,8 @@ DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': 'localhost:1521/xe',
-        'USER': 'c##blanco',
-        'PASSWORD': '123456',
+        'USER': 'TURISMO',
+        'PASSWORD': 'TURISMO',
         'TEST': {
             'USER': 'default_test',
             'TBLSPACE': 'default_test_tbls',
@@ -94,6 +94,7 @@ DATABASES = {
 
 # Django rest framework
 REST_FRAMEWORK = {
+    'DATE_INPUT_FORMATS': ['%d-%m-%Y'],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication'
     ]
