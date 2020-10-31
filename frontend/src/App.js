@@ -22,11 +22,11 @@ function App() {
       <Router>
       <CustomLayout>
         <Switch>
-          <Route path="/empleados" component={EmpleadoListView} />
-          <Route path="/departamentos" component={DepartamentoListView} />
+          <Route path="/empleado" component={EmpleadoListView} />
+          <Route path="/departamento" component={DepartamentoListView} />
           <Route path="/cliente" component={ClienteListView} />
           <Route path="/inventario" component={InventarioListView} />
-          <Route path="/reservas" component={ReservasListView} />
+          <Route path="/reserva" component={ReservasListView} />
         </Switch>
       </CustomLayout>
       </Router>

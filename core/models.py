@@ -205,7 +205,8 @@ class DjangoSession(models.Model):
 
 
 class Empleado(models.Model):
-    rut = models.CharField(primary_key=True, max_length=12)
+    id = models.IntegerField(primary_key=True, max_length=12)
+    rut = models.CharField( max_length=12)
     nombre = models.CharField(max_length=15)
     apellido_p = models.CharField(max_length=15)
     correo = models.CharField(max_length=30)
