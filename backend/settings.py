@@ -83,15 +83,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.oracle',
-<<<<<<< HEAD
+
         'NAME': 'localhost:1521/xepdb1',
         'USER': 'prueba50',
         'PASSWORD': '123',
-=======
-        'NAME': 'localhost:1521/xe',
-        'USER': 'TURISMO',
-        'PASSWORD': 'TURISMO',
->>>>>>> master
+
         'TEST': {
             'USER': 'default_test',
             'TBLSPACE': 'default_test_tbls',
@@ -102,11 +98,7 @@ DATABASES = {
 
 # Django rest framework
 REST_FRAMEWORK = {
-<<<<<<< HEAD
     'DATE_INPUT_FORMATS':['%d-%m-%Y'],
-=======
-    'DATE_INPUT_FORMATS': ['%d-%m-%Y'],
->>>>>>> master
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication'
     ]
