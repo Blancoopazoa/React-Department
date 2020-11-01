@@ -14,7 +14,8 @@ class Acompanante(models.Model):
     apellido_m = models.CharField(max_length=15)
     appelido_p = models.CharField(max_length=15)
     fecha_nacimiento = models.DateField()
-    cliente_rut_pasaporte = models.ForeignKey('Cliente', models.DO_NOTHING, db_column='cliente_rut_pasaporte', blank=True, null=True)
+    ##cliente_rut_pasaporte = models.ForeignKey('Cliente', models.DO_NOTHING, db_column='cliente_rut_pasaporte', blank=True, null=True)
+    reserva_id_reserva = models.ForeignKey('Reserva', models.DO_NOTHING, db_column='reserva_id_reserva', blank=True, null=True)
 
     class Meta:
         managed = False
