@@ -5,9 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
-
-const url="http://127.0.0.1:8000/empleados/";
-
+const url="http://127.0.0.1:8000/inventario/";
 
 class Employess extends Component {
 state={
@@ -15,11 +13,12 @@ state={
   modalInsertar: false,
   modalEliminar: false,
   form:{
-    id: '',
-    rut: '',
-    nombre: '',
-    apellido_p: '',
-    correo: ''
+    id_inventario: '',
+    producto: '',
+    valor: '',
+    estado: '',
+    cantidad: '',
+    departamento_n_rol: ''
   }
 }
 
@@ -57,7 +56,7 @@ peticionPost=async()=>{
 }
 
 peticionPut=()=>{
-    axios.put(url+this.state.form.id+"/", this.state.form).then(response=>{
+    axios.put(url+this.state.form.id_inventario+"/", this.state.form).then(response=>{
          this.modalInsertar();
     this.peticionGet();
   },{
@@ -72,7 +71,7 @@ peticionPut=()=>{
 }
 
 peticionDelete=()=>{
-  axios.delete(url+this.state.form.id).then(response=>{
+  axios.delete(url+this.state.form.id_inventario).then(response=>{
     this.setState({modalEliminar: false});
     this.peticionGet();
   },{
@@ -90,15 +89,16 @@ modalInsertar=()=>{
   this.setState({modalInsertar: !this.state.modalInsertar});
 }
 
-seleccionarEmpleado=(empleado)=>{
+seleccionarInventario=(inventario)=>{
   this.setState({
     tipoModal: 'actualizar',
     form: {
-      id: empleado.id,
-      rut: empleado.rut,
-      nombre: empleado.nombre,
-      apellido_p: empleado.apellido_p,
-      correo: empleado.correo
+      id_inventario: inventario.id_inventario,
+      producto: inventario.producto,
+      valor: inventario.valor,
+      estado: inventario.estado,
+      cantidad: inventario.cantidad,
+      departamento_n_rol: inventario.departamento_n_rol
     }
   })
 }
@@ -124,32 +124,34 @@ console.log(this.state.form);
   return (
     <div className="App">
     <br /><br /><br />
-  <button className="btn btn-success" onClick={()=>{this.setState({form: null, tipoModal: 'insertar'}); this.modalInsertar()}}>Agregar Empleado</button>
+  <button className="btn btn-success" onClick={()=>{this.setState({form: null, tipoModal: 'insertar'}); this.modalInsertar()}}>Agregar Inventario</button>
   <br /><br />
     <table className="table ">
       <thead>
         <tr>
-          <th>Id</th>
-          <th>Rut</th>
-          <th>Nombre</th>
-          <th>Apellido Paterno</th>
-          <th>Correo</th>
+          <th>Id inventario</th>
+          <th>Producto</th>
+          <th>Valor</th>
+          <th>Estado</th>
+          <th>Cantidad</th>
+          <th>Departamento N rol</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        {this.state.data.map(empleado=>{
+        {this.state.data.map(inventario=>{
           return(
             <tr>
-          <td>{empleado.id}</td>
-          <td>{empleado.rut}</td>
-          <td>{empleado.nombre}</td>
-          <td>{empleado.apellido_p}</td>
-          <td>{empleado.correo}</td>
+          <td>{inventario.id_inventario}</td>
+          <td>{inventario.producto}</td>
+          <td>{inventario.valor}</td>
+          <td>{inventario.estado}</td>
+          <td>{inventario.cantidad}</td>
+          <td>{inventario.departamento_n_rol}</td>
           <td>
-                <button className="btn btn-primary" onClick={()=>{this.seleccionarEmpleado(empleado); this.modalInsertar()}}><FontAwesomeIcon icon={faEdit}/></button>
+                <button className="btn btn-primary" onClick={()=>{this.seleccionarInventario(inventario); this.modalInsertar()}}><FontAwesomeIcon icon={faEdit}/></button>
                 {"   "}
-                <button className="btn btn-danger" onClick={()=>{this.seleccionarEmpleado(empleado); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
+                <button className="btn btn-danger" onClick={()=>{this.seleccionarInventario(inventario); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
                 </td>
           </tr>
           )
@@ -165,19 +167,22 @@ console.log(this.state.form);
                 </ModalHeader>
                 <ModalBody>
                   <div className="form-group">
-                  <label htmlFor="id">Id</label>
-                    <input className="form-control" type="text" name="id" id="id" onChange={this.handleChange} value={form?form.id: this.state.data.length+1}/>
-                    <label htmlFor="rut">Rut</label>
-                    <input className="form-control" type="text" name="rut" id="rut" onChange={this.handleChange} value={form?form.rut: ''}/>
+                  <label htmlFor="id_inventario">Id inventario</label>
+                    <input className="form-control" type="text" name="id_inventario" id="id_inventario" onChange={this.handleChange} value={form?form.id_inventario: ''}/>
+                    <label htmlFor="producto">Producto</label>
+                    <input className="form-control" type="text" name="producto" id="producto" onChange={this.handleChange} value={form?form.producto: ''}/>
                     <br />
-                    <label htmlFor="nombre">Nombre</label>
-                    <input className="form-control" type="text" name="nombre" id="nombre" onChange={this.handleChange} value={form?form.nombre: ''}/>
+                    <label htmlFor="valor">Valor</label>
+                    <input className="form-control" type="text" name="valor" id="valor" onChange={this.handleChange} value={form?form.valor: ''}/>
                     <br />
-                    <label htmlFor="nombre">Apellido Paterno</label>
-                    <input className="form-control" type="text" name="apellido_p" id="apellido_p" onChange={this.handleChange} value={form?form.apellido_p: ''}/>
+                    <label htmlFor="estado">Estado</label>
+                    <input className="form-control" type="text" name="estado" id="estado" onChange={this.handleChange} value={form?form.estado: ''}/>
                     <br />
-                    <label htmlFor="nombre">correo</label>
-                    <input className="form-control" type="text" name="correo" id="correo" onChange={this.handleChange} value={form?form.correo:''}/>
+                    <label htmlFor="cantidad">Cantidad</label>
+                    <input className="form-control" type="text" name="cantidad" id="cantidad" onChange={this.handleChange} value={form?form.cantidad:''}/>
+                    <br/>
+                    <label htmlFor="departamento_n_rol">Departamento N Rol</label>
+                    <input className="form-control" type="text" name="departamento_n_rol" id="departamento_n_rol" onChange={this.handleChange} value={form?form.departamento_n_rol:''}/>
                   </div>
                 </ModalBody>
 
@@ -196,7 +201,7 @@ console.log(this.state.form);
 
           <Modal isOpen={this.state.modalEliminar}>
             <ModalBody>
-               Estás seguro que deseas eliminar el empleado {form && form.nombre}
+               Estás seguro que deseas eliminar el inventario {form && form.nombre}
             </ModalBody>
             <ModalFooter>
               <button className="btn btn-danger" onClick={()=>this.peticionDelete()}>Sí</button>

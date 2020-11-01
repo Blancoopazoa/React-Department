@@ -5,9 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
-
-const url="http://127.0.0.1:8000/empleados/";
-
+const url="http://127.0.0.1:8000/reserva/";
 
 class Employess extends Component {
 state={
@@ -15,11 +13,11 @@ state={
   modalInsertar: false,
   modalEliminar: false,
   form:{
-    id: '',
-    rut: '',
-    nombre: '',
-    apellido_p: '',
-    correo: ''
+    id_reserva: '',
+    fecha_llegada: '',
+    departamento_n_rol: '',
+    pago_id_pago: '',
+    cliente_rut_pasaporte: ''
   }
 }
 
@@ -57,7 +55,7 @@ peticionPost=async()=>{
 }
 
 peticionPut=()=>{
-    axios.put(url+this.state.form.id+"/", this.state.form).then(response=>{
+    axios.put(url+this.state.form.id_reserva+"/", this.state.form).then(response=>{
          this.modalInsertar();
     this.peticionGet();
   },{
@@ -72,7 +70,7 @@ peticionPut=()=>{
 }
 
 peticionDelete=()=>{
-  axios.delete(url+this.state.form.id).then(response=>{
+  axios.delete(url+this.state.form.id_reserva).then(response=>{
     this.setState({modalEliminar: false});
     this.peticionGet();
   },{
@@ -90,15 +88,15 @@ modalInsertar=()=>{
   this.setState({modalInsertar: !this.state.modalInsertar});
 }
 
-seleccionarEmpleado=(empleado)=>{
+seleccionarReservas=(reservas)=>{
   this.setState({
     tipoModal: 'actualizar',
     form: {
-      id: empleado.id,
-      rut: empleado.rut,
-      nombre: empleado.nombre,
-      apellido_p: empleado.apellido_p,
-      correo: empleado.correo
+      id_reserva: reservas.id_reserva,
+      fecha_llegada: reservas.fecha_llegada,
+      departamento_n_rol: reservas.departamento_n_rol,
+      pago_id_pago: reservas.pago_id_pago,
+      cliente_rut_pasaporte: reservas.cliente_rut_pasaporte
     }
   })
 }
@@ -124,32 +122,32 @@ console.log(this.state.form);
   return (
     <div className="App">
     <br /><br /><br />
-  <button className="btn btn-success" onClick={()=>{this.setState({form: null, tipoModal: 'insertar'}); this.modalInsertar()}}>Agregar Empleado</button>
+    <h1>Reservas</h1>
   <br /><br />
     <table className="table ">
       <thead>
         <tr>
-          <th>Id</th>
-          <th>Rut</th>
-          <th>Nombre</th>
-          <th>Apellido Paterno</th>
-          <th>Correo</th>
+          <th>Id Reserva</th>
+          <th>Fecha Llegada</th>
+          <th>Departamento N Rol</th>
+          <th>Id Pago</th>
+          <th>Cliente Rut Pasaporte</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        {this.state.data.map(empleado=>{
+        {this.state.data.map(reservas=>{
           return(
             <tr>
-          <td>{empleado.id}</td>
-          <td>{empleado.rut}</td>
-          <td>{empleado.nombre}</td>
-          <td>{empleado.apellido_p}</td>
-          <td>{empleado.correo}</td>
+          <td>{reservas.id_reserva}</td>
+          <td>{reservas.fecha_llegada}</td>
+          <td>{reservas.departamento_n_rol}</td>
+          <td>{reservas.pago_id_pago}</td>
+          <td>{reservas.cliente_rut_pasaporte}</td>
           <td>
-                <button className="btn btn-primary" onClick={()=>{this.seleccionarEmpleado(empleado); this.modalInsertar()}}><FontAwesomeIcon icon={faEdit}/></button>
+                <button className="btn btn-primary" onClick={()=>{this.seleccionarReservas(reservas); this.modalInsertar()}}><FontAwesomeIcon icon={faEdit}/></button>
                 {"   "}
-                <button className="btn btn-danger" onClick={()=>{this.seleccionarEmpleado(empleado); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
+                <button className="btn btn-danger" onClick={()=>{this.seleccionarReservas(reservas); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
                 </td>
           </tr>
           )
@@ -165,19 +163,19 @@ console.log(this.state.form);
                 </ModalHeader>
                 <ModalBody>
                   <div className="form-group">
-                  <label htmlFor="id">Id</label>
-                    <input className="form-control" type="text" name="id" id="id" onChange={this.handleChange} value={form?form.id: this.state.data.length+1}/>
-                    <label htmlFor="rut">Rut</label>
-                    <input className="form-control" type="text" name="rut" id="rut" onChange={this.handleChange} value={form?form.rut: ''}/>
+                  <label htmlFor="id_reserva">Id Reserva</label>
+                    <input className="form-control" type="text" name="id_reserva" id="id_reserva" onChange={this.handleChange} value={form?form.id_reserva: ''}/>
+                    <label htmlFor="fecha_llegada">Fecha Llegada</label>
+                    <input className="form-control" type="text" name="fecha_llegada" id="fecha_llegada" onChange={this.handleChange} value={form?form.fecha_llegada: ''}/>
                     <br />
-                    <label htmlFor="nombre">Nombre</label>
-                    <input className="form-control" type="text" name="nombre" id="nombre" onChange={this.handleChange} value={form?form.nombre: ''}/>
+                    <label htmlFor="departamento_n_rol">Departamento N Rol</label>
+                    <input className="form-control" type="text" name="departamento_n_rol" id="departamento_n_rol" onChange={this.handleChange} value={form?form.departamento_n_rol: ''}/>
                     <br />
-                    <label htmlFor="nombre">Apellido Paterno</label>
-                    <input className="form-control" type="text" name="apellido_p" id="apellido_p" onChange={this.handleChange} value={form?form.apellido_p: ''}/>
+                    <label htmlFor="pago_id_pago">Id Pago</label>
+                    <input className="form-control" type="text" name="pago_id_pago" id="pago_id_pago" onChange={this.handleChange} value={form?form.pago_id_pago: ''}/>
                     <br />
-                    <label htmlFor="nombre">correo</label>
-                    <input className="form-control" type="text" name="correo" id="correo" onChange={this.handleChange} value={form?form.correo:''}/>
+                    <label htmlFor="cliente_rut_pasaporte">Cliente Rut Pasaporte</label>
+                    <input className="form-control" type="text" name="cliente_rut_pasaporte" id="cliente_rut_pasaporte" onChange={this.handleChange} value={form?form.cliente_rut_pasaporte:''}/>
                   </div>
                 </ModalBody>
 
@@ -196,7 +194,7 @@ console.log(this.state.form);
 
           <Modal isOpen={this.state.modalEliminar}>
             <ModalBody>
-               Estás seguro que deseas eliminar el empleado {form && form.nombre}
+               Estás seguro que deseas eliminar el reservas {form && form.nombre}
             </ModalBody>
             <ModalFooter>
               <button className="btn btn-danger" onClick={()=>this.peticionDelete()}>Sí</button>

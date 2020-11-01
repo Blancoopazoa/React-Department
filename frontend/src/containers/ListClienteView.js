@@ -5,9 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
-
-const url="http://127.0.0.1:8000/empleados/";
-
+const url="http://127.0.0.1:8000/clientes/";
 
 class Employess extends Component {
 state={
@@ -15,11 +13,13 @@ state={
   modalInsertar: false,
   modalEliminar: false,
   form:{
-    id: '',
-    rut: '',
+    rut_pasaporte: '',
+    cel: '',
+    correo: '',
+    nacimineto: '',
     nombre: '',
-    apellido_p: '',
-    correo: ''
+    apellido_m: '',
+    apellido_p: ''
   }
 }
 
@@ -57,7 +57,7 @@ peticionPost=async()=>{
 }
 
 peticionPut=()=>{
-    axios.put(url+this.state.form.id+"/", this.state.form).then(response=>{
+    axios.put(url+this.state.form.rut_pasaporte+"/", this.state.form).then(response=>{
          this.modalInsertar();
     this.peticionGet();
   },{
@@ -72,7 +72,7 @@ peticionPut=()=>{
 }
 
 peticionDelete=()=>{
-  axios.delete(url+this.state.form.id).then(response=>{
+  axios.delete(url+this.state.form.rut_pasaporte).then(response=>{
     this.setState({modalEliminar: false});
     this.peticionGet();
   },{
@@ -90,15 +90,17 @@ modalInsertar=()=>{
   this.setState({modalInsertar: !this.state.modalInsertar});
 }
 
-seleccionarEmpleado=(empleado)=>{
+seleccionarCliente=(cliente)=>{
   this.setState({
     tipoModal: 'actualizar',
     form: {
-      id: empleado.id,
-      rut: empleado.rut,
-      nombre: empleado.nombre,
-      apellido_p: empleado.apellido_p,
-      correo: empleado.correo
+      rut_pasaporte: cliente.rut_pasaporte,
+      cel: cliente.cel,
+      correo: cliente.correo,
+      nacimineto: cliente.nacimineto,
+      nombre: cliente.nombre,
+      apellido_m: cliente.apellido_m,
+      apellido_p: cliente.apellido_p
     }
   })
 }
@@ -124,32 +126,36 @@ console.log(this.state.form);
   return (
     <div className="App">
     <br /><br /><br />
-  <button className="btn btn-success" onClick={()=>{this.setState({form: null, tipoModal: 'insertar'}); this.modalInsertar()}}>Agregar Empleado</button>
+    <h1>Clientes</h1>
   <br /><br />
     <table className="table ">
       <thead>
         <tr>
-          <th>Id</th>
-          <th>Rut</th>
-          <th>Nombre</th>
-          <th>Apellido Paterno</th>
+          <th>Rut Pasaporte</th>
+          <th>Cel</th>
           <th>Correo</th>
+          <th>Nacimineto</th>
+          <th>Nombre</th>
+          <th>Apellido Materno</th>
+          <th>Apellido Paterno</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        {this.state.data.map(empleado=>{
+        {this.state.data.map(cliente=>{
           return(
             <tr>
-          <td>{empleado.id}</td>
-          <td>{empleado.rut}</td>
-          <td>{empleado.nombre}</td>
-          <td>{empleado.apellido_p}</td>
-          <td>{empleado.correo}</td>
+          <td>{cliente.rut_pasaporte}</td>
+          <td>{cliente.cel}</td>
+          <td>{cliente.correo}</td>
+          <td>{cliente.nacimineto}</td>
+          <td>{cliente.nombre}</td>
+          <td>{cliente.apellido_m}</td>
+          <td>{cliente.apellido_p}</td>
           <td>
-                <button className="btn btn-primary" onClick={()=>{this.seleccionarEmpleado(empleado); this.modalInsertar()}}><FontAwesomeIcon icon={faEdit}/></button>
+                <button className="btn btn-primary" onClick={()=>{this.seleccionarCliente(cliente); this.modalInsertar()}}><FontAwesomeIcon icon={faEdit}/></button>
                 {"   "}
-                <button className="btn btn-danger" onClick={()=>{this.seleccionarEmpleado(empleado); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
+                <button className="btn btn-danger" onClick={()=>{this.seleccionarCliente(cliente); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
                 </td>
           </tr>
           )
@@ -165,19 +171,25 @@ console.log(this.state.form);
                 </ModalHeader>
                 <ModalBody>
                   <div className="form-group">
-                  <label htmlFor="id">Id</label>
-                    <input className="form-control" type="text" name="id" id="id" onChange={this.handleChange} value={form?form.id: this.state.data.length+1}/>
-                    <label htmlFor="rut">Rut</label>
-                    <input className="form-control" type="text" name="rut" id="rut" onChange={this.handleChange} value={form?form.rut: ''}/>
+                  <label htmlFor="rut_pasaporte">Rut Pasaporte</label>
+                    <input className="form-control" type="text" name="rut_pasaporte" id="rut_pasaporte" onChange={this.handleChange} value={form?form.rut_pasaporte: ''}/>
+                    <label htmlFor="cel">Cel</label>
+                    <input className="form-control" type="text" name="cel" id="cel" onChange={this.handleChange} value={form?form.cel: ''}/>
+                    <br />
+                    <label htmlFor="correo">Correo</label>
+                    <input className="form-control" type="email" name="correo" id="correo" onChange={this.handleChange} value={form?form.correo: ''}/>
+                    <br />
+                    <label htmlFor="nacimineto">Nacimineto</label>
+                    <input className="form-control" type="text" name="nacimineto" id="nacimineto" onChange={this.handleChange} value={form?form.nacimineto: ''}/>
                     <br />
                     <label htmlFor="nombre">Nombre</label>
-                    <input className="form-control" type="text" name="nombre" id="nombre" onChange={this.handleChange} value={form?form.nombre: ''}/>
-                    <br />
-                    <label htmlFor="nombre">Apellido Paterno</label>
-                    <input className="form-control" type="text" name="apellido_p" id="apellido_p" onChange={this.handleChange} value={form?form.apellido_p: ''}/>
-                    <br />
-                    <label htmlFor="nombre">correo</label>
-                    <input className="form-control" type="text" name="correo" id="correo" onChange={this.handleChange} value={form?form.correo:''}/>
+                    <input className="form-control" type="text" name="nombre" id="nombre" onChange={this.handleChange} value={form?form.nombre:''}/>
+                    <br/>
+                    <label htmlFor="apellido_m">Apellido Materno</label>
+                    <input className="form-control" type="text" name="apellido_m" id="apellido_m" onChange={this.handleChange} value={form?form.apellido_m:''}/>
+                    <br/>
+                    <label htmlFor="apellido_p">Apellido Paterno</label>
+                    <input className="form-control" type="text" name="apellido_p" id="apellido_p" onChange={this.handleChange} value={form?form.apellido_p:''}/>
                   </div>
                 </ModalBody>
 
@@ -196,7 +208,7 @@ console.log(this.state.form);
 
           <Modal isOpen={this.state.modalEliminar}>
             <ModalBody>
-               Estás seguro que deseas eliminar el empleado {form && form.nombre}
+               Estás seguro que deseas eliminar el cliente {form && form.nombre}
             </ModalBody>
             <ModalFooter>
               <button className="btn btn-danger" onClick={()=>this.peticionDelete()}>Sí</button>

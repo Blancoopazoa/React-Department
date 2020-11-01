@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import EmpleadoListView from './containers/ListEmpleadosView';
 import DepartamentoListView from './containers/ListDepartamentoView';
+import ClienteListView from './containers/ListClienteView';
+import InventarioListView from './containers/ListInventarioView';
+import ReservasListView from './containers/ListReservasView';
 
 //importacion libreria de diseño
 import 'antd/dist/antd.css'; 
@@ -19,8 +22,11 @@ function App() {
       <Router>
       <CustomLayout>
         <Switch>
-          <Route path="/empleados" component={EmpleadoListView} />
-          <Route path="/departamentos" component={DepartamentoListView} />
+          <Route path="/empleado" component={EmpleadoListView} />
+          <Route path="/departamento" component={DepartamentoListView} />
+          <Route path="/cliente" component={ClienteListView} />
+          <Route path="/inventario" component={InventarioListView} />
+          <Route path="/reserva" component={ReservasListView} />
         </Switch>
       </CustomLayout>
       </Router>

@@ -28,16 +28,19 @@ const CustomLayout = (props) => {
             <div className="logo" />
             <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
               <Menu.Item key="1" icon={<UserOutlined />}>
-                <Link to="/empleados">Empleados</Link>
+                <Link to="/empleado">Empleados</Link>
               </Menu.Item>
               <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-              <Link to="/departamentos">Departamentos</Link>
+              <Link to="/departamento">Departamentos</Link>
               </Menu.Item>
               <Menu.Item key="3" icon={<UploadOutlined />}>
-                Reservas
+              <Link to="/cliente">Cliente</Link>
               </Menu.Item>
               <Menu.Item key="4" icon={<BarChartOutlined />}>
-                Servicios
+              <Link to="/inventario">Inventario</Link>
+              </Menu.Item>
+              <Menu.Item key="5" icon={<BarChartOutlined />}>
+              <Link to="/reserva">Reservas</Link>
               </Menu.Item>
             </Menu>
           </Sider>
