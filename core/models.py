@@ -206,8 +206,8 @@ class DjangoSession(models.Model):
 
 
 class Empleado(models.Model):
-    id = models.IntegerField(primary_key=True, max_length=12)
-    rut = models.CharField( max_length=12)
+    #id = models.IntegerField(primary_key=True, max_length=12)
+    rut = models.CharField (primary_key=True, max_length=12)
     nombre = models.CharField(max_length=15)
     apellido_p = models.CharField(max_length=15)
     correo = models.CharField(max_length=30)
@@ -265,7 +265,7 @@ class Multas(models.Model):
 
 
 class Pago(models.Model):
-    fecha_pago = models.DateField()
+    fecha_pago = models.DateField(auto_now_add=True)
     monto = models.BigIntegerField()
     tipo_operacion = models.CharField(max_length=10)
     descripcion_pago = models.CharField(max_length=10)
