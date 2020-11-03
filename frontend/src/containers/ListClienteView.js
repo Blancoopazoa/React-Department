@@ -127,6 +127,8 @@ console.log(this.state.form);
     <div className="App">
     <br /><br /><br />
     <h1>Clientes</h1>
+    <br/>
+    <button className="btn btn-success" onClick={()=>{this.setState({form: null, tipoModal: 'insertar'}); this.modalInsertar()}}>Agregar Clientes</button>
   <br /><br />
     <table className="table ">
       <thead>
