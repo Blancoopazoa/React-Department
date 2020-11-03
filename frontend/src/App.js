@@ -7,6 +7,7 @@ import DepartamentoListView from './containers/ListDepartamentoView';
 import ClienteListView from './containers/ListClienteView';
 import InventarioListView from './containers/ListInventarioView';
 import ReservasListView from './containers/ListReservasView';
+import ServicesListView from './containers/ListServicesView';
 
 //importacion libreria de diseño
 import 'antd/dist/antd.css'; 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/cliente" component={ClienteListView} />
           <Route path="/inventario" component={InventarioListView} />
           <Route path="/reserva" component={ReservasListView} />
+          <Route path="/servicios" component={ServicesListView} />
         </Switch>
       </CustomLayout>
       </Router>

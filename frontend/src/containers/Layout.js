@@ -26,7 +26,7 @@ const CustomLayout = (props) => {
             <br/>
             <br/>
             <div className="logo" />
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
+            <Menu theme="dark" mode="inline">
               <Menu.Item key="1" icon={<UserOutlined />}>
                 <Link to="/empleado">Empleados</Link>
               </Menu.Item>
@@ -41,6 +41,9 @@ const CustomLayout = (props) => {
               </Menu.Item>
               <Menu.Item key="5" icon={<BarChartOutlined />}>
               <Link to="/reserva">Reservas</Link>
+              </Menu.Item>
+              <Menu.Item key="6" icon={<BarChartOutlined />}>
+              <Link to="/servicios">Servicios</Link>
               </Menu.Item>
             </Menu>
           </Sider>
