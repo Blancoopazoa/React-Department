@@ -17,16 +17,23 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
 from rest_framework import routers
-from core import views
-
+#from core import views
+from rest_framework.authtoken.views import obtain_auth_token
+from rest_framework_jwt.views import obtain_jwt_token
+# from .views import current_user, UserList
 """ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'empleado',views.EmpleadoViewSet) """
-
+from core.views import current_user, UserList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html')),
     path('', include('core.urls')),
+    path('auth/', obtain_auth_token),
+    path('token-auth/', obtain_jwt_token),
+    path('current_user/', current_user),
+    path('users/', UserList.as_view())
+    
 ]

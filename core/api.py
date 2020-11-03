@@ -1,6 +1,12 @@
 from core.models import Vehiculo, Tour, Servicio, Reserva, Region, Pago, Empleado, Acompanante, CheckIn, CheckOut, Cliente, Chofer, Comuna, Departamento, Inventario, Login, Mantencion, Multas 
 from rest_framework import viewsets, permissions
-from .serializers import VehiculoSerializer, TourSerializer, ServicioSerializer, ReservaSerializer, RegionSerializer, PagoSerializer, EmpleadoSerializer, AcompananteSerializer, CheckInSerializer, CheckOutSerializer, ClienteSerializer, ChoferSerializer,MultasSerializer, ComunaSerializer, DepartamentoSerializer, InventarioSerializer, LoginSerializer, MantencionSerializer
+from .serializers import UserSerializer,VehiculoSerializer, TourSerializer, ServicioSerializer, ReservaSerializer, RegionSerializer, PagoSerializer, EmpleadoSerializer, AcompananteSerializer, CheckInSerializer, CheckOutSerializer, ClienteSerializer, ChoferSerializer,MultasSerializer, ComunaSerializer, DepartamentoSerializer, InventarioSerializer, LoginSerializer, MantencionSerializer
+from django.contrib.auth.models import User
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 
 class EmpleadoViewSet(viewsets.ModelViewSet):
     queryset = Empleado.objects.all()
