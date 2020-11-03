@@ -124,6 +124,8 @@ console.log(this.state.form);
   return (
     <div className="App">
     <br /><br /><br />
+    <h1>Empleados</h1>
+    <br/>
   <button className="btn btn-success" onClick={()=>{this.setState({form: null, tipoModal: 'insertar'}); this.modalInsertar()}}>Agregar Empleado</button>
   <br /><br />
     <table className="table ">
