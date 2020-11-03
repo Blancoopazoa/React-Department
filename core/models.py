@@ -264,7 +264,7 @@ class Multas(models.Model):
 
 
 class Pago(models.Model):
-    fecha_pago = models.DateField()
+    fecha_pago = models.DateField(auto_now_add=True)
     monto = models.BigIntegerField()
     tipo_operacion = models.CharField(max_length=10)
     descripcion_pago = models.CharField(max_length=10)
