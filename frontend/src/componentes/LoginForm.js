@@ -25,10 +25,11 @@ handlePasswordChange = (e) => {
 
   render() {
     const  estilo ={
-      marginTop: "8%"
+      marginTop: "5%"
     };
     return (
-      <form onSubmit={e => this.props.handle_login(e, this.state)}>
+     <div class="container">
+     <form  onSubmit={e => this.props.handle_login(e, this.state)}>
         {/* <label htmlFor="username">Usuario :</label> */}
         <p>Ingrese Usuario</p>
         <input
@@ -50,6 +51,7 @@ handlePasswordChange = (e) => {
        <button style={estilo} className="btn btn-success" type='submit'>Login</button>
        
       </form>
+      </div>
     );
   }
 }
