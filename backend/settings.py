@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
+ACCESS_CONTROL_ALLOW_ORIGIN = ['*']
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,11 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'rest_framework',   
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -81,9 +83,9 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'localhost:1521/xe',
-        'USER': 'TURISMO',
-        'PASSWORD': 'TURISMO',
+        'NAME': 'localhost:1521/orcl',
+        'USER': 'desarrollo',
+        'PASSWORD': '123456',
         'TEST': {
             'USER': 'default_test',
             'TBLSPACE': 'default_test_tbls',
@@ -91,7 +93,6 @@ DATABASES = {
         },
     },
 }
-
 # Django rest framework
 REST_FRAMEWORK = {
     'DATE_INPUT_FORMATS': ['%d-%m-%Y'],
@@ -140,5 +141,35 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS= [
     os.path.join(BASE_DIR,'frontend/build/static')
+]
+
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000"    
+]
+
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'backend.utils.my_jwt_response_handler'
+}
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
 ]
 
