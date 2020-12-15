@@ -16,7 +16,7 @@ state={
     id_servicio: '',
     nom_servicio: '',
     valor: '',
-    vehiculo_patente: '',
+    //vehiculo_patente: '',
     departamento_n_rol: ''
   }
 }
@@ -95,7 +95,7 @@ seleccionarServicio=(servicios)=>{
         id_servicio: servicios.id_servicio,
         nom_servicio: servicios.nom_servicio,
         valor: servicios.valor,
-        vehiculo_patente: servicios.vehiculo_patente,
+        //vehiculo_patente: servicios.vehiculo_patente,
         departamento_n_rol: servicios.departamento_n_rol
     }
   })
@@ -132,7 +132,6 @@ console.log(this.state.form);
           <th>Id Servicio</th>
           <th>Num Servicio</th>
           <th>Valor</th>
-          <th>Vehiculo Patente</th>
           <th>Departamento N Rol</th>
           <th>Acciones</th>
         </tr>
@@ -144,7 +143,6 @@ console.log(this.state.form);
           <td>{servicios.id_servicio}</td>
           <td>{servicios.nom_servicio}</td>
           <td>{servicios.valor}</td>
-          <td>{servicios.vehiculo_patente}</td>
           <td>{servicios.departamento_n_rol}</td>
           <td>
                 <button className="btn btn-primary" onClick={()=>{this.seleccionarServicio(servicios); this.modalInsertar()}}><FontAwesomeIcon icon={faEdit}/></button>
@@ -172,9 +170,6 @@ console.log(this.state.form);
                     <br />
                     <label htmlFor="valor">Valor</label>
                     <input className="form-control" type="text" name="valor" id="valor" onChange={this.handleChange} value={form?form.valor: ''}/>
-                    <br />
-                    <label htmlFor="vehiculo_patente">Vehiculo Patente</label>
-                    <input className="form-control" type="text" name="vehiculo_patente" id="vehiculo_patente" onChange={this.handleChange} value={form?form.vehiculo_patente: ''}/>
                     <br />
                     <label htmlFor="departamento_n_rol">Departamento N Rol</label>
                     <input className="form-control" type="text" name="departamento_n_rol" id="departamento_n_rol" onChange={this.handleChange} value={form?form.departamento_n_rol:''}/>
