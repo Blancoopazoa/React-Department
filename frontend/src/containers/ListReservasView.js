@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faAddressBook, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
 const url="http://127.0.0.1:8000/reserva/";
@@ -20,6 +20,8 @@ state={
     cliente_rut_pasaporte: ''
   }
 }
+
+
 
 
 
@@ -149,6 +151,7 @@ console.log(this.state.form);
                 {"   "}
                 <button className="btn btn-danger" onClick={()=>{this.seleccionarReservas(reservas); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
                 </td>
+                
           </tr>
           )
         })}
@@ -201,6 +204,8 @@ console.log(this.state.form);
               <button className="btn btn-secundary" onClick={()=>this.setState({modalEliminar: false})}>No</button>
             </ModalFooter>
           </Modal>
+
+         
   </div>
 
 
