@@ -205,8 +205,8 @@ class DjangoSession(models.Model):
 
 
 class Empleado(models.Model):
-    id = models.IntegerField(primary_key=True)
-    rut = models.CharField(max_length=12)
+    # id = models.IntegerField(primary_key=True)
+    rut = models.CharField(primary_key=True,max_length=11)
     nombre = models.CharField(max_length=15)
     apellido_p = models.CharField(max_length=15)
     correo = models.CharField(max_length=30)
@@ -301,7 +301,7 @@ class Servicio(models.Model):
     id_servicio = models.IntegerField(primary_key=True)
     nom_servicio = models.CharField(max_length=30)
     valor = models.IntegerField()
-    vehiculo_patente = models.ForeignKey('Vehiculo', models.DO_NOTHING, db_column='vehiculo_patente', blank=True, null=True)
+    #vehiculo_patente = models.ForeignKey('Vehiculo', models.DO_NOTHING, db_column='vehiculo_patente', blank=True, null=True)
     departamento_n_rol = models.ForeignKey(Departamento, models.DO_NOTHING, db_column='departamento_n_rol')
 
     class Meta:
