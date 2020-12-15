@@ -3,10 +3,11 @@ import "../../App.css";
 import { Button } from "./Button";
 import "./HeroSection.css";
 
+import img1 from "../../assets/images/img-9.jpg";
+
 function HeroSection() {
   return (
     <div className="hero-container">
-      <video src="/videos/video-1.mp4" autoPlay loop muted />
       <h1>LA AVENTURA ESPERA</h1>
       <p>Que estas esperando?</p>
       <br></br>
