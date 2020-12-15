@@ -6,18 +6,18 @@ import { faAddressBook, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-i
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
 const url="http://127.0.0.1:8000/reserva/";
+const url1="http://127.0.0.1:8000/checkins/";
 
 class Employess extends Component {
 state={
   data:[],
-  modalInsertar: false,
-  modalEliminar: false,
+  modalCheckin: false,
   form:{
-    id_reserva: '',
-    fecha_llegada: '',
-    departamento_n_rol: '',
-    pago_id_pago: '',
-    cliente_rut_pasaporte: ''
+    id_chek_in:'',
+    fecha_llegada:'',
+    estado_hbitacion:'',
+    departamento_n_rol:'',
+    empleado_rut: ''
   }
 }
 
@@ -39,10 +39,10 @@ axios.get(url).then(response=>{
 })
 }
 
-peticionPost=async()=>{
- await axios.post(url,this.state.form).then(response=>{
-    this.modalInsertar();
-    this.peticionGet();
+ peticionPost=async()=>{
+ await axios.post(url1,this.state.form).then(response=>{
+    this.modalCheckin();
+    //this.peticionGet();
   },{
     withCredentials: true,
     headers: {'Content-Type': 'application/json',
@@ -56,8 +56,8 @@ peticionPost=async()=>{
   .catch(error => console.error(error));
 }
 
-peticionPut=()=>{
-    axios.put(url+this.state.form.id_reserva+"/", this.state.form).then(response=>{
+ peticionPut=()=>{
+    axios.put(url1+this.state.form.id_check_in+"/", this.state.form).then(response=>{
          this.modalInsertar();
     this.peticionGet();
   },{
@@ -69,7 +69,7 @@ peticionPut=()=>{
   })
   .then(res => console.log(res))
   .catch(error => console.error(error));
-}
+} 
 
 peticionDelete=()=>{
   axios.delete(url+this.state.form.id_reserva).then(response=>{
@@ -84,10 +84,10 @@ peticionDelete=()=>{
   })
   .then(res => console.log(res))
   .catch(error => console.error(error));
-}
+} 
 
-modalInsertar=()=>{
-  this.setState({modalInsertar: !this.state.modalInsertar});
+modalCheckin=()=>{
+  this.setState({modalCheckin: !this.state.modalCheckin});
 }
 
 seleccionarReservas=(reservas)=>{
@@ -124,8 +124,10 @@ console.log(this.state.form);
   return (
     <div className="App">
     <br /><br /><br />
-    <h1>Reservas</h1>
+    <h1>Reservas Pendientes</h1>
   <br /><br />
+  <button className="btn btn-success" onClick={()=>{this.setState({form: null, tipoModal: 'insertar'}); this.modalCheckin()}}>Confirmar Check In</button>
+
     <table className="table ">
       <thead>
         <tr>
@@ -147,10 +149,8 @@ console.log(this.state.form);
           <td>{reservas.pago_id_pago}</td>
           <td>{reservas.cliente_rut_pasaporte}</td>
           <td>
-                <button className="btn btn-primary" onClick={()=>{this.seleccionarReservas(reservas); this.modalInsertar()}}><FontAwesomeIcon icon={faEdit}/></button>
-                {"   "}
-                <button className="btn btn-danger" onClick={()=>{this.seleccionarReservas(reservas); this.setState({modalEliminar: true})}}><FontAwesomeIcon icon={faTrashAlt}/></button>
-                </td>
+            <button className="btn btn-secondary" onClick={()=>{this.modalCheckin(reservas); this.modalCheckin()}}><FontAwesomeIcon icon={faAddressBook}/> </button>
+             </td>
                 
           </tr>
           )
@@ -160,52 +160,43 @@ console.log(this.state.form);
 
 
 
-    <Modal isOpen={this.state.modalInsertar}>
+   
+          <Modal isOpen={this.state.modalCheckin}>
                 <ModalHeader style={{display: 'block'}}>
-                  <span style={{float: 'right'}} onClick={()=>this.modalInsertar()}>x</span>
+                  <span style={{float: 'right'}} onClick={()=>this.modalCheckin()}>x</span>
                 </ModalHeader>
                 <ModalBody>
                   <div className="form-group">
-                  <label htmlFor="id_reserva">Id Reserva</label>
-                    <input className="form-control" type="text" name="id_reserva" id="id_reserva" onChange={this.handleChange} value={form?form.id_reserva: ''}/>
+                    <label htmlFor="id_checkin">Id Check In</label>
+                    <input className="form-control" type="text" name="id_chek_in" id="id_chek_in" onChange={this.handleChange} value={form?form.id_chek_in:''}/>
+                    <br/>
                     <label htmlFor="fecha_llegada">Fecha Llegada</label>
-                    <input className="form-control" type="text" name="fecha_llegada" id="fecha_llegada" onChange={this.handleChange} value={form?form.fecha_llegada: ''}/>
+                    <input className="form-control" type="text" name="fecha_llegada" id="fecha_llegada" onChange={this.handleChange} value={form?form.fecha_llegada:''}/>
+                    <br />
+                    <label htmlFor="estado_hbitacion">Estado Habitacion</label>
+                    <input className="form-control" type="text" name="estado_hbitacion" id="estado_hbitacion" onChange={this.handleChange} value={form?form.estado_hbitacion:''}/>
                     <br />
                     <label htmlFor="departamento_n_rol">Departamento N Rol</label>
-                    <input className="form-control" type="text" name="departamento_n_rol" id="departamento_n_rol" onChange={this.handleChange} value={form?form.departamento_n_rol: ''}/>
+                    <input className="form-control" type="text" name="departamento_n_rol" id="departamento_n_rol" onChange={this.handleChange} value={form?form.departamento_n_rol:''}/>
                     <br />
-                    <label htmlFor="pago_id_pago">Id Pago</label>
-                    <input className="form-control" type="text" name="pago_id_pago" id="pago_id_pago" onChange={this.handleChange} value={form?form.pago_id_pago: ''}/>
-                    <br />
-                    <label htmlFor="cliente_rut_pasaporte">Cliente Rut Pasaporte</label>
-                    <input className="form-control" type="text" name="cliente_rut_pasaporte" id="cliente_rut_pasaporte" onChange={this.handleChange} value={form?form.cliente_rut_pasaporte:''}/>
+                    <label htmlFor="empleado_rut">Rut Empleado</label>
+                    <input className="form-control" type="text" name="empleado_rut" id="empleado_rut" onChange={this.handleChange} value={form?form.empleado_rut:''}/>
                   </div>
                 </ModalBody>
 
                 <ModalFooter>
                   {this.state.tipoModal==='insertar'?
-                    <button className="btn btn-success" onClick={()=>this.peticionPost()}>
+                <button className="btn btn-success" onClick={()=>this.peticionPost()}>
                     Insertar
-                  </button>: <button className="btn btn-primary" onClick={()=>this.peticionPut()}>
-                    Actualizar
-                  </button>
+                </button>: 
+                <button className="btn btn-primary" onClick={()=>this.peticionPost()}>
+                    Ingresar Check In
+                </button>
   }
-                    <button className="btn btn-danger" onClick={()=>this.modalInsertar()}>Cancelar</button>
+                <button className="btn btn-danger" onClick={()=>this.modalCheckin()}>Cancelar</button>
                 </ModalFooter>
           </Modal>
 
-
-          <Modal isOpen={this.state.modalEliminar}>
-            <ModalBody>
-               Estás seguro que deseas eliminar el reservas {form && form.nombre}
-            </ModalBody>
-            <ModalFooter>
-              <button className="btn btn-danger" onClick={()=>this.peticionDelete()}>Sí</button>
-              <button className="btn btn-secundary" onClick={()=>this.setState({modalEliminar: false})}>No</button>
-            </ModalFooter>
-          </Modal>
-
-         
   </div>
 
 
