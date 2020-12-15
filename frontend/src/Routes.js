@@ -9,6 +9,8 @@ import InventarioListView from './containers/ListInventarioView';
 import ReservasListView from './containers/ListReservasView';
 import ServicesListView from './containers/ListServicesView';
 import LandingPage from './containers/LandingPageView';
+import CheckInListView from './containers/ListCheckInView'
+import CheckOutListView from './containers/ListCheckOutView'
 
 //importacion libreria de diseño
 import 'antd/dist/antd.css'; 
@@ -32,6 +34,8 @@ function Rutas() {
           <Route path="/inventario" component={InventarioListView} />
           <Route path="/reserva" component={ReservasListView} />
           <Route path="/servicios" component={ServicesListView} />
+          <Route path="/checkin" component={CheckInListView}/>
+          <Route path="/checkout" component={CheckOutListView}/>
           </CustomLayout>
         </Switch>
       </Router>

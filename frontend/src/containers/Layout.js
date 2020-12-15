@@ -45,9 +45,15 @@ const CustomLayout = (props) => {
               <Menu.Item key="6" icon={<BarChartOutlined />}>
               <Link to="/servicios">Servicios</Link>
               </Menu.Item>
+              <Menu.Item key="7" icon={<BarChartOutlined />}>
+              <Link to="/checkin">Check In</Link>
+              </Menu.Item>
+              <Menu.Item key="8" icon={<BarChartOutlined />}>
+              <Link to="/checkout">Check Out</Link>
+              </Menu.Item>
             </Menu>
           </Sider>
-          <Layout className="site-layout" style={{ marginLeft: 200 }}>
+          <Layout className="site-layout" style={{  marginLeft: 200 }}>
             <Header className="site-layout-background" style={{ padding: 0 }} />
             <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
               <Content
