@@ -26,14 +26,7 @@ const CustomLayout = (props) => {
             <br/>
             <br/>
             <div className="logo" />
-<<<<<<< HEAD
             <Menu theme="dark" mode="inline">
-=======
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
-            <Menu.Item key="0" icon={<UserOutlined />}>
-                <Link to="/home">Home</Link>
-              </Menu.Item>
->>>>>>> ad6221bc72c125658dfc77704838e09875dd78cd
               <Menu.Item key="1" icon={<UserOutlined />}>
                 <Link to="/empleado">Empleados</Link>
               </Menu.Item>
@@ -52,9 +45,15 @@ const CustomLayout = (props) => {
               <Menu.Item key="6" icon={<BarChartOutlined />}>
               <Link to="/servicios">Servicios</Link>
               </Menu.Item>
+              <Menu.Item key="7" icon={<BarChartOutlined />}>
+              <Link to="/checkin">Check In</Link>
+              </Menu.Item>
+              <Menu.Item key="8" icon={<BarChartOutlined />}>
+              <Link to="/checkout">Check Out</Link>
+              </Menu.Item>
             </Menu>
           </Sider>
-          <Layout className="site-layout" style={{ marginLeft: 200 }}>
+          <Layout className="site-layout" style={{  marginLeft: 200 }}>
             <Header className="site-layout-background" style={{ padding: 0 }} />
             <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
               <Content

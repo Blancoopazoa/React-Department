@@ -181,7 +181,7 @@ console.log(this.state.form);
                     <label htmlFor="correo">Correo</label>
                     <input className="form-control" type="email" name="correo" id="correo" onChange={this.handleChange} value={form?form.correo: ''}/>
                     <br />
-                    <label htmlFor="nacimineto">Nacimineto</label>
+                    <label htmlFor="nacimineto">Nacimiento</label>
                     <input className="form-control" type="text" name="nacimineto" id="nacimineto" onChange={this.handleChange} value={form?form.nacimineto: ''}/>
                     <br />
                     <label htmlFor="nombre">Nombre</label>

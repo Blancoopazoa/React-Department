@@ -15,7 +15,7 @@ state={
   modalInsertar: false,
   modalEliminar: false,
   form:{
-    id: '',
+   // id: '',
     rut: '',
     nombre: '',
     apellido_p: '',
@@ -57,7 +57,7 @@ peticionPost=async()=>{
 }
 
 peticionPut=()=>{
-    axios.put(url+this.state.form.id+"/", this.state.form).then(response=>{
+    axios.put(url+this.state.form.rut+"/", this.state.form).then(response=>{
          this.modalInsertar();
     this.peticionGet();
   },{
@@ -72,7 +72,7 @@ peticionPut=()=>{
 }
 
 peticionDelete=()=>{
-  axios.delete(url+this.state.form.id).then(response=>{
+  axios.delete(url+this.state.form.rut).then(response=>{
     this.setState({modalEliminar: false});
     this.peticionGet();
   },{
@@ -94,7 +94,7 @@ seleccionarEmpleado=(empleado)=>{
   this.setState({
     tipoModal: 'actualizar',
     form: {
-      id: empleado.id,
+     // id: empleado.id,
       rut: empleado.rut,
       nombre: empleado.nombre,
       apellido_p: empleado.apellido_p,
@@ -131,7 +131,6 @@ console.log(this.state.form);
     <table className="table ">
       <thead>
         <tr>
-          <th>Id</th>
           <th>Rut</th>
           <th>Nombre</th>
           <th>Apellido Paterno</th>
@@ -143,7 +142,6 @@ console.log(this.state.form);
         {this.state.data.map(empleado=>{
           return(
             <tr>
-          <td>{empleado.id}</td>
           <td>{empleado.rut}</td>
           <td>{empleado.nombre}</td>
           <td>{empleado.apellido_p}</td>
@@ -167,8 +165,6 @@ console.log(this.state.form);
                 </ModalHeader>
                 <ModalBody>
                   <div className="form-group">
-                  <label htmlFor="id">Id</label>
-                    <input className="form-control" type="text" name="id" id="id" onChange={this.handleChange} value={form?form.id: this.state.data.length+1}/>
                     <label htmlFor="rut">Rut</label>
                     <input className="form-control" type="text" name="rut" id="rut" onChange={this.handleChange} value={form?form.rut: ''}/>
                     <br />
