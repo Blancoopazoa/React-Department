@@ -34,32 +34,15 @@
   font-size: 100px;
 }
 
-<<<<<<< HEAD
 .sign-up {
   background-image: url("/images/img-8.jpg");
   background-position: center;
   background-size: cover;
-=======
-.products {
-  background-image: url("/images/img-1.jpg");
-  background-position: center;
-  background-size: fill;
->>>>>>> 6b536079058225db57a491cb0f0f90e8d521d841
   background-repeat: no-repeat;
   color: #fff;
   font-size: 100px;
 }
 
-<<<<<<< HEAD
 center{
   position: center;
-=======
-.sign-up {
-  background-image: url("/images/img-8.jpg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: #fff;
-  font-size: 100px;
->>>>>>> 6b536079058225db57a491cb0f0f90e8d521d841
 }
