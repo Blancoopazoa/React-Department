@@ -4,7 +4,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Home from "./componentes/pages/Home";
 import Navbar from "./componentes/Home/Navbar";
-import Routes from "./Routes"; 
+import Routes from "./Routes";
+import Login from "./componentes/LoginForm";
+import Products from "./componentes/pages/Products";
+import services from "./componentes/pages/Services";
 
 //importacion libreria de diseño
 import 'antd/dist/antd.css'; 
@@ -17,9 +20,12 @@ function App() {
       <Navbar />
       <Switch>
       <Route path="/Routes" exact component={Routes} />
+      <Route path="/Login" exact component={Login} />
       </Switch>
         <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/Products" exact component={Products} />
+        <Route path="/services" exact component={services} />
         </Switch>
       </Router>
     </div>

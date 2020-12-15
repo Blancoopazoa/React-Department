@@ -1,6 +1,12 @@
 import React from "react";
 import "../../App.css";
+import CardItem from "../Home/CardItem";
 
-export default function Services() {
-  return <h1 className="services">SERVICIOS</h1>;
+
+export default function Products() {
+  return (
+    <>
+    <CardItem />
+  </>
+  );
 }
