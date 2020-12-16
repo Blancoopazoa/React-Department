@@ -10,13 +10,12 @@ function Cards() {
       <p>Somos una empresa Turistica, con la mejora calidad del mundo</p>
       <br></br>
       <div className="hero-btns">
-        <Button
+      <Button
           className="btns"
-          buttonStyle="btn--primary"
+          buttonStyle="btn--outline"
           buttonSize="btn--large"
-          onClick={console.log("hey")}
         >
-          VER EL TRAILER <i className="far fa-play-circle" />
+          EMPEZAR
         </Button>
       </div>
     </div>

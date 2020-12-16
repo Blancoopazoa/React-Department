@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import "../App";
+import { Link } from "react-router-dom";
+import { Button } from "../componentes/Home/Button";
 
 
 function Nav(props) {
@@ -15,7 +17,7 @@ function Nav(props) {
     <ul>
       <button className="btn btn-danger" onClick={props.handle_logout}>Cerrar Sesión</button>
       {"  "}
-      <button className="btn btn-secondary" onClick={() => this.handleClick()}>Ingreso al Portal </button>
+      <Button buttonStyle="btn--secunder"><Link to="/Routes">Panel Administrador</Link></Button>
     </ul>
   );
   return <div>{props.logged_in ? logged_in_nav : logged_out_nav}</div>;

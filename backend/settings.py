@@ -83,14 +83,9 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.oracle',
-<<<<<<< HEAD
-        'NAME': 'localhost:1521/xe',
-        'USER': 'c##blanco',
-=======
-        'NAME': 'localhost:1521/orcl',
-        'USER': 'desarrollo',
->>>>>>> ad6221bc72c125658dfc77704838e09875dd78cd
-        'PASSWORD': '123456',
+        'NAME': 'portafolio.c0yxwec0snda.us-east-1.rds.amazonaws.com:1521/database',
+        'USER': 'admin',
+        'PASSWORD': 'admin123',
         'TEST': {
             'USER': 'default_test',
             'TBLSPACE': 'default_test_tbls',
