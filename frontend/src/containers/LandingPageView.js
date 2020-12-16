@@ -104,8 +104,9 @@ class App extends Component {
           <h3>
             {this.state.logged_in
               ? `Bienvenid@, ${this.state.username}`
-              : 'Por Favor Iniciar Sesion'}
+              : 'Por Favor Iniciar Sesion'}  
           </h3>
+          
         </div>
       );
     }

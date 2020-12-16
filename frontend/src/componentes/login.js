@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
+
 function Nav(props) {
   const logged_out_nav = (
     <ul>
@@ -13,10 +14,13 @@ function Nav(props) {
   const logged_in_nav = (
     <ul>
       <button className="btn btn-danger" onClick={props.handle_logout}>Cerrar Sesión</button>
+      {"  "}
+      <button className="btn btn-secondary" onClick={() => this.handleClick()}>Ingreso al Portal </button>
     </ul>
   );
   return <div>{props.logged_in ? logged_in_nav : logged_out_nav}</div>;
 }
+
 
 export default Nav;
 
